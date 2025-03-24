@@ -1,405 +1,318 @@
- #დაწერეთ პროგრამა სადაც მომხმარებელი შემოიტანს ტექსტს "camelCase" პრინციპით, თქვენმა პროგრამამ იგივე ტექსტი უნდა დააბრუნოს "snake_case" პრინციპით.
-import re
+#ბიბლიოთეკა Emojize-ის დახმარებით დაწერეთ პროგრამა სადაც მომხარებელი შეძლებს შემოიყვანოს ტექსტი სადაც შესაძლებელია იყოს ემოჯების უნიკოდი მაგალითად 👍. თქვენმა პროგრამამ უნდა დააბრუნოს იგივე ტექსტი ოღონდ უნიკოდის ნაცვლად უნდა იყოს ემოჯი.
+from emojize import emojize
 
-def camel_to_snake(text):
-    if not re.match(r'^[a-z]+[A-Z][a-zA-Z]*$', text):
-        return text
-    
-    return re.sub(r'([a-z])([A-Z])', r'\1_\2', text).lower()
+def convert_text_with_emojis():
+    user_input = input("Enter text with emoji codes: ")
+    converted_text = emojize(user_input, language='alias')
+    print("Converted text:", converted_text)
 
-user_input = input("camelCase: ")
-print("camel_case:", camel_to_snake(user_input))
+convert_text_with_emojis()
 
-#წარმოიდგინეთ აპარატის რომელიც ყიდის კოკაკოლას, კოკაკოლის ბოთლი ღირს 50 ცენტი, აპარატს შეუძლია მიიღოს მხოლოდ 25,10,5 ცენტიანი მონეტები.
+#იბლიოთეკა figlet-ის დახმარებით დაწერეთ პროგრამა სადაც მომხარებელი შეძლებს შემოიყვანოს ტექსტი.
+#ასევე გამოიყენეთ sys ბიბლიოთეკა საიდანაც შეძლებთ პროგრამის გაშვებისას სასურველი ფონტის აღებას.
 
-#დაწერეთ პროგრამა სადაც იმიტაცია იქნება იმ პროცესის როცა აპარატში ვათავსებთ სხვადასხვა ტიპის მონეტებს და გვსურს რომ ვიყიდოთ კოკაკოლა. გაითვალისწინეთ რომ თუ 50 ცენტს გასცდა პროგრამამ დასრულებისას უნდა დააბრუნოს ის ხურდის რაოდენობა რაც ზედმეტად გადახდა მოხდა
+#თუ გაშვებისას არ არის მითითებული კონკრეტული ფონტი მაშინ რანდომულად აირჩიეთ ფონტი და მიღებული ტექსი გამობეჭდეთ figlet-ის რანდომული ფონტით.
 
-#ასევე გაითვალისწინეთ რომ თუ მომხმარებელმა მიუთითა არარსებული მონეტა თავიდან უნდა მოხდეს კითვის დასმა
-import os 
-def get_coin();
-     while True:
-        try:
-            coin = int(input("Insert Coin: "))
-            if coin in [25, 10, 5]:
-                return coin
-            else:
-                print("Invalid coin. Please insert 25, 10, or 5 cents.")
-        except ValueError:
-            print("Invalid input. Please insert a valid coin.")
+#თუ გაშვებისას არის მითითებული კონკრეტული ფონტი -f --font მეშვეობით მაშინ ამ კონკრეტული ფონტით გამობეჭდეთ მიღებული ტექსტი
 
-def vending_machine():
-    amount_due = 50
-    while amount_due > 0:
-        print(f"Amount Due: {amount_due}")
-        amount_due -= get_coin()
-    
-    change_owed = abs(amount_due)
-    print(f"Change Owed: {change_owed}")
+from emojize import emojize
 
-if __name__ == "__main__":
-    vending_machine()
+def convert_text_with_emojis():
+    user_input = input("Enter text with emoji codes: ")
+    converted_text = emojize(user_input, language='alias')
+    print("Converted text:", converted_text)
 
-#დაწერეთ პროგრამა სადაც მომხმარებელი შემოიყვანს ტექსტს, პროგრამამ უნდა დააბრუნოს იგივე ტექსტი ოღონდ ხმოვნების გარეშე. გაითვალისწინეთ რომ მომხმარებელმა შეიძლება შემოიყვანოს როგორც დაბალი ასევე მაღალი რეგისტრის ასოები.
-def remove_vowels(text):
-    vowels = "AEIOUaeiou"
-    return "".join(char for char in text if char not in vowels)
+convert_text_with_emojis()
+
+#- პროექტი 66 - Adieu, Adieu
+import inflect
 
 def main():
-    user_input = input("Input: ")
-    print("Output:", remove_vowels(user_input))
+    p = inflect.engine()
+    names = []
 
-if __name__ == "__main__":
-    main()
-
-#დაწერეთ პროგრამა სადაც მომხარებელი შემოიყვანს ტექსტს. თქვენმა პროგრამამ უნდა შეამოწმოს ეს ტექსტი და თუ აკმაყოფილებს ყველა მოთხოვნებს მაშინ გამოპრინტეთ "Valid" სხვა შემთხვევაში "Invalid".
-
-#მოთხოვნები რომლელსაც მომხარებლის ტექსტი უნდა აკმაყოფილებდეს:
-#ტექსტის სიგრძე უნდა იყოს მინიმუმ 2 მაქსიმუმ 6 სიმბოლო
-#ტექსტის პირველი 2 სიმბოლო აუცილებლად უნდა იყოს ასობგერა
-#ტექსტი არ უნდა შეიცავდეს არცერთ პუნქტუაციის ნიშანს
-#თუ ტექსტში არის ციფრები პირველი ციფრი არ უნდა იყოს "0"
-#თუ ტექსტში არის ციფრები ციფრის მერე არ უნდა იყოს ასობგერა
-
-def main():
-    plate = input("plate: ")
-     if is_valid(plate):
-        print("Valid")
-    else:
-     print("Invalid")
-
-def is_valid(s):
-    if not (2 <= len(s) <= 6):
-        return False
-    if not (s[0].isalpha() and s[1].isalpha()):
-        return False
-    if any(char in "!@#$%^&*()-_=+[]{}|;:'",.<>?/" for char in s):
-        return False
-    digits_started = False
-    for i, char in enumerate(s):
-        if char.isdigit():
-            if not digits_started and char == "0":
-                return False
-            digits_started = True
-        elif digits_started:
-            return False
-    return True
-
-main()
-
-#აქ მოცემული გვაქვს გარკვეული ხილის ჩამონათვალი და კალორიულობა (იხ. პირველი სვეტი)
-
-#დაწერეთ პროგრამა სადაც მომხამრებელი შემოიყვანს ხილის დასახელებას და თქვენმა პროგრამამ უნდა დააბრუნოს ამ ხილის კალორიულობა.
-
-#გაითვალისწინეთ ის რომ მომხარებელმა შეიძლება შემოიყვანოს მაღალი ან/და დაბალი რეგისტრის ხილის დასახელებები. თუ ხილის დასახელება არ არის სიაში მაშინ არაფერი არ უნდა დააბრუნოს თქვენმა პროგრამამ
-
-#მინიშნება: შექმენით თქვენს პროგრამაში ხილის ჩამონათვალის და კალორიულობის ლექსიკონი
- 
- def main():
-    fruits = {
-        "apple": 130,
-        "avocado": 50,
-        "banana": 110,
-        "cantaloupe": 50,
-        "grapefruit": 60,
-        "grapes": 90,
-        "honeydew melon": 50,
-        "kiwifruit": 90,
-        "lemon": 15,
-        "lime" :20,
-        "nectarine":60,
-        "orange": 80,
-        "peach":60,
-        "pear": 100,
-        "pineapple": 50,
-        "plums": 70,
-        "strawberries": 50,
-        "sweet cherries": 100,
-        "tangerine": 50,
-        "watermelon": 80,
-    }
-    fruit = input("Fruit: ").strip().lower()
-    if fruit in fruits:
-        print("Calories:", fruits[fruit])
-
-main()
- 
- #შექმენით პროგრამა, რომელიც მომხმარებელს 5-ჯერ ეკითხება რიცხვის input-ს, შემდეგ კი ამ რიცხვების ჯამი გამოაქვს პასუხად.
-def main():
-    total = 0
-    for _ in range(5):
-        num = int(input("Enter a number: "))
-        total += num
-    print("The total is", total)
-
-main()
- 
- #ფინანსებში 'Rule 72' არის ფორმულა, რომლითაც ინვესტორები ითვლიან თავიანთი ინვესტიიცის გაორმაგების ვადას. ანუ იმას, თუ რამდენ წელში გაორმაგდება მათი ინვესტიცია. ეს ფორმულა ასე გამოიყურება years = 72/r სადაც r არის საპროცენტო განაკვეთი.
-
-#დაწერეთ პროგრამა სადაც მომხარებელი შემოიყვანს რიცხვს და ამ ფორმულის მეშვეობით მიიღებთ შესაბამის შედეგს. მაგალითად
-r = float(input())
-years = 72 / r
-print(years)
-#შექმენით პატარა ლისტი, სადაც შეინახავთ კომპანიაში მომუშავეთა სახელებსა და გვარებს. როცა კოდს გაუშვებთ, ლისტიდან თითიოეული მონაცემი უნდა იბეჭდებოდეს ისე, როგორც მაგალითშია ნაჩვენები. შემდეგ შეეკითხეთ მომხმარებელს, თუ რომელი თანამშრომლის ამოშლა უნდა ამ სიიდან, რის შემდეგაც ეს თანამშრომელი ამოშალეთ და მომუშავეთა სია თავიდან გამოიტანეთ
-employees = [
-    "John Smith",
-    "Jackie Jackson",
-    "Chris Jones",
-    "Amanda Cullen",
-    "Jeremy Goodwin"
-]
-
-print(f"There are {len(employees)} employees:")
-for employee in employees:
-    print(employee)
-
-employee_to_remove = input("\nEnter an employee name to remove: ")
-
-if employee_to_remove in employees:
-    employees.remove(employee_to_remove)
-    print(f"\n{employee_to_remove} has been removed.")
-else:
-    print("\nEmployee not found!")
-
-print(f"\nThere are {len(employees)} employees:")
-for employee in employees:
-    print(employee)
-
-#შექმენით პროგრამა, რომელიც მომხმარებელს შეეკითხება რიცხვებს (საიტებიდან კავშირის გაგზავნა-დაბრუნების დროებს). პროგრამა იქამდე უნდა ეკითხეობდეს მომხმარებელს რიცხვებს, სანამ იგი "done"-ს არ ჩაწერს. ამის შემდეგ პროგრამამ უნდა დაითვალოს შეყვანილი რიცხვებიდან: საშუალო არითმეტიკული, უმცირესი და უდიდეს
-
-def get_numbers():
-    numbers =[]
-    while True:
-        user_input = input("Enter a number: ")
-        if user_input.lower() == 'done':
-            break
-        try:
-            number = float(user_input)
-            numbers.append(number)
-        except ValueError:
-            print("Invalid input. Please enter a number or 'done' to finish.")
-    return numbers
-
-def compute_average(numbers):
-    return sum(numbers) / len(numbers)
-
-def compute_minimum(numbers):
-    minimum = numbers[0]
-    for number in numbers:
-        if number < minimum:
-            minimum = number
-    return minimum
-
-def compute_maximum(numbers):
-    maximum = numbers[0]
-    for number in numbers:
-        if number > maximum:
-            maximum = number
-    return maximum
-
-def main():
-    numbers = get_numbers()
-    if numbers:
-        print(f"Numbers: {', '.join(map(str, numbers))}")
-        print(f"The average is {compute_average(numbers)}.")
-        print(f"The minimum is {compute_minimum(numbers)}.")
-        print(f"The maximum is {compute_maximum(numbers)}.")
-    else:
-        print("No numbers were entered.")
-
-if __name__ == "__main__":
-    main()
-
-#შექმენით პროგრამა, რომელიც მომხმარებელს ეკითხება რიცხვების სიას, რომელიც გამოყოფილია სფეისებით. (იხილეთ მაგალითი) შემდეგ კი გამოიტანეთ იგივე ფორმატით მხოლოდ ლუწი რიცხვები.
-def get_numbers():
-    user_input =("Enter a list of numbers, separated by spaces")
-    numbers = user_input.split()
-    return[int(number)for number in numbers]
-  
-  def filter_even_numbers(numbers):
-    return [number for number in numbers if number % 2 == 0]
-
-def main():
-    numbers = get_numbers()
-    even_numbers = filter_even_numbers(numbers)
-    print(f"The even numbers are {' '.join(map(str, even_numbers))}.")
-
-if __name__ == "__main__":
-    main()
-
- #შექმენით პროგრამა, რომელიც მომხმარებელს ეკითხება რიცხვების სიას, რომელიც გამოყოფილია სფეისებით. (იხილეთ მაგალითი) შემდეგ კი გამოიტანეთ იგივე ფორმატით მხოლოდ ლუწი რიცხვები.
- def get_numbers():
-    user_input = input("Enter a list of numbers, separated by spaces: ")
-    numbers = user_input.split()
-    return [int(number) for number in numbers]
-
-def filter_even_numbers(numbers):
-    return [number for number in numbers if number % 2 == 0]
-
-def main():
-    numbers = get_numbers()
-    even_numbers = filter_even_numbers(numbers)
-    print(f"The even numbers are {' '.join(map(str, even_numbers))}.")
-
-if __name__ == "__main__":
-    main()
-
-#მოცემულია შემდეგი ცხრილი (იხილეთ მიმაგრებული სტრუქტურა ცვლადით PEOPLE):
-
-#შექმენით პროგრამა, რომელიც ამ ცხრილის ყველა თანამშრომელს გვარების მიხედვით დაასორტირებს. შემდეგ კი მაგალითში ნაჩვენები სახით გამოიტანს.
-
-#საბოლოო შედეგში სია ამ თანმიმდევრობით უნდა იყოს:
-
-from tabulate import tabulate
-
-PEOPLE = [
-    {"First Name": "Jake", "Last Name": "Jacobson", "Position": "Programmer", "Separation Date": ""},
-    {"First Name": "Tou", "Last Name": "Xiong", "Position": "Software Engineer", "Separation Date": "2016-10-05"},
-    {"First Name": "John", "Last Name": "Johnson", "Position": "Manager", "Separation Date": "2016-12-31"},
-    {"First Name": "Michaela", "Last Name": "Michaelson", "Position": "District Manager", "Separation Date": "2015-12-19"},
-    {"First Name": "Sally", "Last Name": "Weber", "Position": "Web Developer", "Separation Date": "2015-12-18"},
-    {"First Name": "Jacquelyn", "Last Name": "Jackson", "Position": "DBA", "Separation Date": ""},
-]
-
-def sort_people_by_lastname(people):
-    return sorted(people, key=lambda x: x["Last Name"])
-
-def format_people_table(people):
-    headers = ["Name", "Position", "Separation Date"]
-    table_data = [[f'{p["First Name"]} {p["Last Name"]}', p["Position"], p["Separation Date"]] for p in people]
-    return tabulate(table_data, headers=headers, tablefmt="grid")
-
-def main():
-    sorted_people = sort_people_by_lastname(PEOPLE)
-    print(format_people_table(sorted_people))
-
-if __name__ == "__main__":
-    main()
-
-#- პროექტი 50 - Filtering Records
-from tabulate import tabulate
-
-PEOPLE = [
-    {"First Name": "Jake", "Last Name": "Jacobson", "Position": "Programmer", "Separation Date": ""},
-    {"First Name": "Tou", "Last Name": "Xiong", "Position": "Software Engineer", "Separation Date": "2016-10-05"},
-    {"First Name": "John", "Last Name": "Johnson", "Position": "Manager", "Separation Date": "2016-12-31"},
-    {"First Name": "Michaela", "Last Name": "Michaelson", "Position": "District Manager", "Separation Date": "2015-12-19"},
-    {"First Name": "Sally", "Last Name": "Weber", "Position": "Web Developer", "Separation Date": "2015-12-18"},
-    {"First Name": "Jacquelyn", "Last Name": "Jackson", "Position": "DBA", "Separation Date": ""},
-]
-
-def search_employee(name, people):
-    return [p for p in people if p["First Name"].lower() == name.lower()]
-
-def format_people_table(people):
-    headers = ["Name", "Position", "Separation Date"]
-    table_data = [[f'{p["First Name"]} {p["Last Name"]}', p["Position"], p["Separation Date"]] for p in people]
-    return tabulate(table_data, headers=headers, tablefmt="grid")
-
-def main():
-    search_name = input("Enter a search string: ").strip()
-    results = search_employee(search_name, PEOPLE)
-
-    if results:
-        print("\nResults:\n")
-        print(format_people_table(results))
-    else:
-        print(f"\nNo employee found with the name '{search_name}'.")
-
-if __name__ == "__main__":
-    main()
-#დაწერეთ მარტივი გამოკითხვის პროგრამა სადაც მომხმარებელს დაუსმევთ 5 კითხვას, რომელზეც მომხარებელმა უნდა უპასუხოს yes/no.
-def ask_question(question):
-    while True:
-        answer = input(f"{question} (yes/no): ").strip().lower()
-        if answer in ["yes", "no"]:
-            return answer
-        print("Invalid input. Please enter 'yes' or 'no'.")
-
-def main():
-    questions = [
-        "Do you like Python?",
-        "Do you enjoy coding?",
-        "Are you a student?",
-        "Do you work remotely?",
-        "Is this survey helpful?"
-    ]
-
-    yes_count = 0
-    no_count = 0
-
-    for question in questions:
-        answer = ask_question(question)
-        if answer == "yes":
-            yes_count += 1
-        else:
-            no_count += 1
-
-    print(f"\nSummary: {yes_count} yes, {no_count} no")
-
-if __name__ == "__main__":
-    main()
-
-#- პროექტი 53 - Budget Planer
-def get_expenses():
-    expenses = {}
-    while True:
-        name = input("Expense name (type 'done' to finish): ").strip()
-        if name.lower() == "done":
-            break
+    try:
         while True:
-            try:
-                value = float(input(f"Expense value for {name}: $").strip())
-                if value < 0:
-                    print("Expense value cannot be negative. Try again.")
-                    continue
-                expenses[name] = value
-                break
-            except ValueError:
-                print("Invalid input. Please enter a valid number.")
-    return expenses
-
-def get_income():
-    while True:
-        try:
-            income = float(input("Enter your total monthly income: $").strip())
-            if income < 0:
-                print("Income cannot be negative. Try again.")
-                continue
-            return income
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
-
-def get_savings_amount(remaining_balance):
-    while True:
-        try:
-            savings = float(input("Enter your desired monthly savings: $").strip())
-            if savings < 0:
-                print("Savings amount cannot be negative. Try again.")
-                continue
-            return savings
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
-
-def main():
-    expenses = get_expenses()
-    income = get_income()
-
-    total_expenses = sum(expenses.values())
-    remaining_balance = income - total_expenses
-
-    print("\nExpense Breakdown:")
-    for name, value in expenses.items():
-        print(f"{name}: ${value:.2f}")
-
-    if remaining_balance >= 0:
-        print(f"You're saving ${remaining_balance:.2f} this month.")
-        savings = get_savings_amount(remaining_balance)
-        if savings <= remaining_balance:
-            print("You can save that amount this month.")
-        else:
-            print("You don't have enough remaining balance to save that amount.")
-    else:
-        print(f"You're short by ${abs(remaining_balance):.2f} this month.")
+            name = input("Name: ")
+            if name.strip():
+                names.append(name)
+    except EOFError:
+        print()
+        farewell = p.join(names, final_sep=" and ")
+        print(f"Adieu, adieu, to {farewell}")
 
 if __name__ == "__main__":
     main()
+
+#- პროექტი 67 - Guessing Game
+import random
+
+def get_level():
+    while True:
+        try:
+            level = int(input("Level: "))
+            if level > 0:
+                return level
+        except ValueError:
+            pass
+
+def get_guess():
+    while True:
+        try:
+            return int(input("Guess: "))
+        except ValueError:
+            pass
+
+def guessing_game():
+    level = get_level()
+    secret_number = random.randint(1, level)
+
+    while True:
+        guess = get_guess()
+        
+        if guess < secret_number:
+            print("Too small!")
+        elif guess > secret_number:
+            print("Too large!")
+        else:
+            print("Just right!")
+            break
+
+guessing_game()
+
+#- პროექტი 68 - Little Professor
+import random
+
+def main():
+    level = get_level()
+    score = 0
+
+    for _ in range(10):
+        x, y = generate_integer(level)
+        correct_answer = x + y
+        attempts = 0
+
+        while attempts < 3:
+            try:
+                answer = int(input(f"{x} + {y} = "))
+                if answer == correct_answer:
+                    score += 1
+                    break
+                else:
+                    print("EEE")
+                    attempts += 1
+            except ValueError:
+                print("EEE")
+                attempts += 1
+        
+        if attempts == 3:
+            print(f"{x} + {y} = {correct_answer}")
+
+    print(f"Score: {score}")
+
+def get_level():
+    while True:
+        try:
+            level = int(input("Level: "))
+            if level in [1, 2, 3]:
+                return level
+        except ValueError:
+            pass
+
+def generate_integer(level):
+    ranges = {1: (0, 10), 2: (10, 100), 3: (100, 1000)}
+    start, end = ranges[level]
+    return random.randint(start, end - 1), random.randint(start, end - 1)
+
+if __name__ == "__main__":
+    main()
+
+#- პროექტი 69 - Bitcoin Price Index
+import sys
+import requests
+
+def get_bitcoin_price():
+    url = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
+    response = requests.get(url)
+    data = response.json()
+    return data['bpi']['USD']['rate_float']
+
+def main():
+    if len(sys.argv) != 2:
+        print("გთხოვთ, მიუთითოთ რიცხვი, მაგალითად: python bitcoin.py 1")
+        sys.exit(1)
+    
+    bitcoin_amount = float(sys.argv[1])
+    bitcoin_price = get_bitcoin_price()
+    usd_amount = bitcoin_amount * bitcoin_price
+    
+    print(f"${usd_amount:,.4f}")
+
+if __name__ == '__main__':
+    main()
+
+#- პროექტი 70 - Magic 8 Ball
+import random
+
+def magic_8_ball():
+    responses = ["Yes", "No", "Ask again later"]
+    return random.choice(responses)
+
+def main():
+    question = input("Whats your question? ")
+    print(magic_8_ball())
+
+if __name__ == '__main__':
+    main()
+#- პროექტი 72 - Password Generator
+import string
+import random
+
+def get_positive_integer(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            if value < 1:
+                print("Please enter a positive number.")
+            else:
+                return value
+        except ValueError:
+            print("Please enter a valid number.")
+
+def generate_password(min_length, num_special_chars, num_numbers):
+    if min_length < num_special_chars + num_numbers:
+        print("Password minimum length should be greater than or equal to the sum of special characters and numbers.")
+        return None
+
+    all_chars = string.ascii_letters + string.digits + string.punctuation
+    password = []
+
+    password.extend(random.choices(string.punctuation, k=num_special_chars))
+    password.extend(random.choices(string.digits, k=num_numbers))
+
+    remaining_length = min_length - len(password)
+    password.extend(random.choices(string.ascii_letters, k=remaining_length))
+
+    random.shuffle(password)
+
+    return ''.join(password)
+
+def main():
+    min_length = get_positive_integer("What's the minimum length? ")
+    num_special_chars = get_positive_integer("How many special characters? ")
+    num_numbers = get_positive_integer("How many numbers? ")
+
+    password = generate_password(min_length, num_special_chars, num_numbers)
+    
+    if password:
+        print("Your password is")
+        print(password)
+
+if __name__ == '__main__':
+    main()
+#- პროექტი 73 - Guess the Number Game
+import random
+
+def get_difficulty_level():
+    while True:
+        try:
+            level = int(input("Pick a difficulty level (1, 2, or 3): "))
+            if level in [1, 2, 3]:
+                return level
+            else:
+                print("Invalid level. Please choose between 1, 2, or 3.")
+        except ValueError:
+            print("Please enter a valid number.")
+
+def generate_number(level):
+    if level == 1:
+        return random.randint(1, 10)
+    elif level == 2:
+        return random.randint(1, 100)
+    elif level == 3:
+        return random.randint(1, 1000)
+
+def get_guess():
+    while True:
+        try:
+            guess = int(input("What's your guess? "))
+            return guess
+        except ValueError:
+            print("Please enter a valid number.")
+
+def evaluate_guess(guess, number):
+    if guess < number:
+        return "Too low."
+    elif guess > number:
+        return "Too high."
+    else:
+        return "You got it!"
+
+def give_feedback(guesses):
+    if guesses == 1:
+        return "You're a mind reader!"
+    elif 2 <= guesses <= 4:
+        return "Most impressive."
+    elif 5 <= guesses <= 7:
+        return "You can do better than that."
+    else:
+        return "Better luck next time."
+
+def play_game():
+    print("Lets play Guess the Number.")
+    
+    while True:
+        level = get_difficulty_level()
+        number = generate_number(level)
+        guesses = 0
+        guessed_correctly = False
+
+        while not guessed_correctly:
+            guess = get_guess()
+            guesses += 1
+            result = evaluate_guess(guess, number)
+            print(result)
+
+            if guess == number:
+                guessed_correctly = True
+                print(f"You got it in {guesses} guesses!")
+                print(give_feedback(guesses))
+        
+        play_again = input("Play again? (y/n): ").lower()
+        if play_again != 'y':
+            print("Goodbye!")
+            break
+
+if __name__ == '__main__':
+    play_game()
+
+#- პროექტი 75 - speech to text
+import speech_recognition as sr
+
+def recognize_speech():
+    recognizer = sr.Recognizer()
+
+    with sr.Microphone() as source:
+        print("Please speak now...")
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
+
+    try:
+        print("You said: " + recognizer.recognize_google(audio))
+    except sr.UnknownValueError:
+        print("Sorry, I could not understand what you said.")
+    except sr.RequestError as e:
+        print(f"Could not request results; {e}")
+
+if __name__ == "__main__":
+    recognize_speech()
+
+#- პროექტი 76 - Google Search
+import webbrowser
+
+def google_search():
+    search_query = input("What would you like to search for on Google? ")
+    webbrowser.open(search_query)
+
+if __name__ == "__main__":
+    google_search()
